@@ -1,5 +1,11 @@
 # 🛒 Dropshipping Pipeline
 
+[![Python](https://img.shields.io/badge/Python-3.8+-blue.svg)](https://python.org)
+[![Kafka](https://img.shields.io/badge/Kafka-Redpanda-orange.svg)](https://redpanda.com)
+[![Snowflake](https://img.shields.io/badge/Snowflake-Data%20Warehouse-blue.svg)](https://snowflake.com)
+[![Streamlit](https://img.shields.io/badge/Streamlit-Dashboard-red.svg)](https://streamlit.io)
+[![License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
+
 Un pipeline ETL complet pour un site de dropshipping vêtements, utilisant Kafka/Redpanda pour le streaming, Snowflake pour le stockage et l'analyse, et Streamlit pour le monitoring en temps réel.
 
 ## 🏗️ Architecture
