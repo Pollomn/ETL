@@ -1,0 +1,43 @@
+```mermaid
+graph TB
+    A[Data Generator<br/>data_generator.py] --> B[Kafka Producer<br/>Topic: orders]
+    B --> C[Redpanda/Kafka<br/>Port: 9092]
+    C --> D[Kafka Consumer<br/>consumer_snowflake.py]
+    D --> E[Snowflake Database<br/>ma_base.mon_schema]
+    
+    E --> F[CUSTOMERS Table]
+    E --> G[INVENTORY Table]
+    E --> H[ORDERS Table]
+    E --> I[ORDERS_EVENTS Table]
+    
+    J[Snowflake Streams<br/>create_streams.sql] --> K[Snowflake Tasks<br/>create_tasks.sql]
+    E --> J
+    
+    L[Data Validation<br/>validate_data.py] --> E
+    M[Setup Scripts<br/>setup_snowflake.py] --> E
+    
+    E --> N[Streamlit Dashboard<br/>app.py Port: 8501]
+    N --> O[KPIs Display<br/>Orders: 100<br/>Revenue: $21,010.76<br/>Customers: 60<br/>Products: 60]
+    N --> P[Top Products Chart]
+    N --> Q[Recent Orders Table]
+    N --> R[Daily Trends Graph]
+    
+    S[Docker Compose<br/>docker-compose.yml] --> C
+    T[Environment Config<br/>.env] --> A
+    T --> D
+    T --> N
+    
+    U[Documentation<br/>README.md<br/>CONTRIBUTING.md] --> V[GitHub Repository<br/>github.com/Pollomn/ETL]
+    
+    classDef dataSource fill:#e1f5fe
+    classDef kafka fill:#fff3e0
+    classDef snowflake fill:#e8f5e8
+    classDef dashboard fill:#f3e5f5
+    classDef infra fill:#fce4ec
+    
+    class A dataSource
+    class B,C kafka
+    class E,F,G,H,I,J,K,L,M snowflake
+    class N,O,P,Q,R dashboard
+    class S,T,U,V infra
+```

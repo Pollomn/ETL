@@ -82,7 +82,7 @@ class OrderConsumer:
             created_at = datetime.now(timezone.utc)
             
             query = """
-                INSERT INTO mon_schema.orders_events (event_id, event_type, payload, created_at)
+                INSERT INTO MON_SCHEMA.orders_events (event_id, event_type, payload, created_at)
                 VALUES (%s, %s, PARSE_JSON(%s), %s)
             """
             
@@ -189,8 +189,8 @@ def main():
         'password': os.getenv('SNOW_PASSWORD'),
         'role': os.getenv('SNOW_ROLE', 'ACCOUNTADMIN'),
         'warehouse': os.getenv('SNOW_WAREHOUSE', 'COMPUTE_WH'),
-        'database': os.getenv('SNOW_DATABASE', 'DROPSHIPPING_DB'),
-        'schema': os.getenv('SNOW_SCHEMA', 'RAW')
+        'database': os.getenv('SNOW_DATABASE', 'SNOWFLAKE_LEARNING_DB'),
+        'schema': os.getenv('SNOW_SCHEMA', 'MON_SCHEMA')
     }
     
     # Validate required environment variables
