@@ -35,3 +35,4 @@ jobs:
         ls -la docs/
         echo "Total documentation lines:"
         wc -l docs/*.md
+

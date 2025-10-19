@@ -135,3 +135,4 @@ Pour toute question, ouvrez une issue sur GitHub ou contactez l'équipe de déve
 ---
 
 **Merci de contribuer au projet ! 🚀**
+

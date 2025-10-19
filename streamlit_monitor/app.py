@@ -37,7 +37,7 @@ class DropshippingDashboard:
             'role': os.getenv('SNOW_ROLE', 'ACCOUNTADMIN'),
             'warehouse': os.getenv('SNOW_WAREHOUSE', 'COMPUTE_WH'),
             'database': os.getenv('SNOW_DATABASE', 'DROPSHIPPING_DB'),
-            'schema': os.getenv('SNOW_SCHEMA', 'RAW')
+            'schema': os.getenv('SNOW_SCHEMA', 'mon_schema')
         }
     
     def connect(self):
@@ -64,9 +64,11 @@ class DropshippingDashboard:
             self.cursor.execute(query)
             results = self.cursor.fetchall()
             columns = [desc[0] for desc in self.cursor.description]
-            return pd.DataFrame(results, columns=columns)
+            df = pd.DataFrame(results, columns=columns)
+            return df
         except Exception as e:
             st.error(f"Query failed: {e}")
+            st.write(f"Query was: {query}")
             return pd.DataFrame()
     
     def get_kpis(self):
@@ -81,9 +83,12 @@ class DropshippingDashboard:
         """
         
         df = self.execute_query(query)
+        
         if not df.empty:
-            return df.iloc[0].to_dict()
-        return {}
+            result = df.iloc[0].to_dict()
+            return result
+        else:
+            return {}
     
     def get_recent_orders(self, hours=24):
         """Get recent orders."""
@@ -203,7 +208,7 @@ def main():
                 with col1_1:
                     st.metric(
                         label="Total Orders",
-                        value=f"{kpis.get('total_orders', 0):,}",
+                        value=f"{kpis.get('TOTAL_ORDERS', 0):,}",
                         delta=None
                     )
                 
@@ -217,14 +222,14 @@ def main():
                 with col1_3:
                     st.metric(
                         label="Unique Customers",
-                        value=f"{kpis.get('unique_customers', 0):,}",
+                        value=f"{kpis.get('UNIQUE_CUSTOMERS', 0):,}",
                         delta=None
                     )
                 
                 with col1_4:
                     st.metric(
                         label="Unique Products",
-                        value=f"{kpis.get('unique_products', 0):,}",
+                        value=f"{kpis.get('UNIQUE_PRODUCTS', 0):,}",
                         delta=None
                     )
             
