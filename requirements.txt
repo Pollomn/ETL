@@ -1,0 +1,16 @@
+# Generated from pyproject.toml for compatibility
+requests
+requests[socks]
+click
+sqlalchemy>=2.0.40
+responses>=0.25.7
+psycopg2-binary
+snowflake-connector-python
+pandas
+snowflake-connector-python[pandas]
+faker
+kafka-python-ng
+streamlit
+plotly
+pyarrow
+python-dotenv
